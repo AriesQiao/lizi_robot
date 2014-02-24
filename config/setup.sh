@@ -1,8 +1,6 @@
-
-source ~/catkin_ws/devel/setup.bash
-
+#!/bin/bash
+source ../../../devel/setup.bash
 echo "Setting usb rules..."
-roscd lizi/config/
 cp lizi_usb.rules /etc/udev/rules.d
 echo "Adding user: [$SUDO_USER] to dialout group (serial premmisions)"
 usermod -a -G dialout $SUDO_USER
