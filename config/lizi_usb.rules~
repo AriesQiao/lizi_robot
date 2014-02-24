@@ -1,3 +1,0 @@
-SUBSYSTEMS=="usb",  ATTRS{interface}=="FT231X USB UART", SYMLINK+="LiziMC"
-SUBSYSTEMS=="usb",  ATTRS{product}=="Arduino Due Prog. Port", SYMLINK+="LiziDUE"
-
