@@ -1,0 +1,2 @@
+uint8 driver_faults
+float32 battery_voltage
