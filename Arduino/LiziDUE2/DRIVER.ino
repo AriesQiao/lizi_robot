@@ -26,12 +26,11 @@ void read_status() {
   int faults_bit = md.getFault();
   int torque_bit = !md.getTorque();
   int gps_fix_bit = !gps.location.isValid();
-
-  status_msg.driver_faults = 4 * gps_fix_bit + faults_bit + 2 * torque_bit;
+int imu_bit=(int)imu_fault;
+  status_msg.faults = 8*imu_bit + 4 * gps_fix_bit + 2 * torque_bit + faults_bit;
   status_msg.battery_voltage = (float)analogRead(BATTERY_MONITOR_PIN) * 3.3 / 4096 * VOLTAGE_DIVIDER_RATIO;
   p_status.publish(&status_msg);
 
-  // if (md.getFault())  stop_motors();
 }
 
 

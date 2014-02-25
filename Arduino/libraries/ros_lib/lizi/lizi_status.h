@@ -12,14 +12,14 @@ namespace lizi
   class lizi_status : public ros::Msg
   {
     public:
-      uint8_t driver_faults;
+      uint8_t faults;
       float battery_voltage;
 
     virtual int serialize(unsigned char *outbuffer) const
     {
       int offset = 0;
-      *(outbuffer + offset + 0) = (this->driver_faults >> (8 * 0)) & 0xFF;
-      offset += sizeof(this->driver_faults);
+      *(outbuffer + offset + 0) = (this->faults >> (8 * 0)) & 0xFF;
+      offset += sizeof(this->faults);
       union {
         float real;
         uint32_t base;
@@ -36,8 +36,8 @@ namespace lizi
     virtual int deserialize(unsigned char *inbuffer)
     {
       int offset = 0;
-      this->driver_faults =  ((uint8_t) (*(inbuffer + offset)));
-      offset += sizeof(this->driver_faults);
+      this->faults =  ((uint8_t) (*(inbuffer + offset)));
+      offset += sizeof(this->faults);
       union {
         float real;
         uint32_t base;
@@ -53,7 +53,7 @@ namespace lizi
     }
 
     const char * getType(){ return "lizi/lizi_status"; };
-    const char * getMD5(){ return "ac62ebadcb5d5f0651dde12d2ed252ef"; };
+    const char * getMD5(){ return "f66cc2fe91fb70d2b82c88e7c03227df"; };
 
   };
 

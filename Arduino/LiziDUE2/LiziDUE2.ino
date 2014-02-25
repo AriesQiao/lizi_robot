@@ -1,5 +1,5 @@
 
-
+//---------Edit these line to match to set the Lizi ID  ---------
 //SUBSCRIBERS
 #define LIZI_COMMAND_TOPIC "lizi_1/command"
 #define LIZI_PAN_TILT_TOPIC "lizi_1/pan_tilt"
@@ -10,6 +10,7 @@
 //SERVICES
 #define  RESET_ENCODERS_SRV "lizi_1/reset_encoders"
 #define  SET_PARAMETERS_SRV "lizi_1/set_parameters"
+//---------------------------------------------------------------
 
 
 
@@ -68,8 +69,6 @@ GPS PIN 4 -> TX2 = 16
 #include <Arduino.h>
 
 
-
-
 //ROS
 
 #include <ros.h>
@@ -84,7 +83,7 @@ GPS PIN 4 -> TX2 = 16
 
 #define  SERIAL_PORT_SPEED  57600
 #define PUB_RAW_INTERVAL 100 //10 hz
-unsigned long urf_t = 0, enc_t = 0, status_t = 0,pub_t;
+unsigned long urf_t = 0, enc_t = 0, status_t = 0, pub_t;
 ros::NodeHandle nh;
 using std_srvs::Empty;
 using lizi::set_parameters;
@@ -106,10 +105,10 @@ ros::Subscriber<lizi::lizi_command> command_sub(LIZI_COMMAND_TOPIC, &commandCb )
 ros::Subscriber<lizi::lizi_pan_tilt> pan_tilt_sub(LIZI_PAN_TILT_TOPIC, &pantiltCb );
 
 
-
 lizi::lizi_gps gps_msg;
 lizi::lizi_raw raw_msg;
 lizi::lizi_status status_msg;
+
 
 ros::Publisher p_raw(LIZI_RAW_TOPIC, &raw_msg);
 ros::Publisher p_gps(LIZI_GPS_TOPIC, &gps_msg);
@@ -128,7 +127,7 @@ ros::Publisher p_status(LIZI_STATUS_TOPIC, &status_msg);
 Servo pan_servo;
 Servo tilt_servo;
 unsigned long pan_tilt_t = 0;
-bool pan_tilt_moving=true;
+bool pan_tilt_moving = true;
 #define PAN_TILT_MOVE_TIME 1000
 
 
@@ -139,9 +138,10 @@ TinyGPSPlus gps;
 #define GPS_SERIAL_PORT Serial2
 
 //IMU
-float qx=0,qy=0,qz=1,qw=0;
+float qx = 0, qy = 0, qz = 1, qw = 0;
 unsigned long imu_t = 0;
-#define CHECK_IMU_INTERVAL 100
+unsigned long CHECK_IMU_INTERVAL;
+boolean imu_fault=0;
 //  DEVICE_TO_USE selects whether the IMU at address 0x68 (default) or 0x69 is used
 //    0 = use the device at 0x68
 //    1 = use the device at ox69
@@ -201,22 +201,16 @@ unsigned long wd_t = 0, control_t = 0;
 FastRunningMedian<unsigned int, sample_size, 0> Left_URF_Median;
 FastRunningMedian<unsigned int, sample_size, 0> Right_URF_Median;
 FastRunningMedian<unsigned int, sample_size, 0> Rear_URF_Median;
-//#define ad_sample_delay 1//ms
-//float sample[3][sample_size];
-//int samples=0;
+
 
 
 void setup()
 {
 
-pinMode(13, OUTPUT);
+  pinMode(13, OUTPUT);
   Serial.begin(SERIAL_PORT_SPEED);
-  
-//unsigned long testID = 5;
-//char buf[25];
-//sprintf(buf, "lizi_%lu/command", testID);
-//nh.loginfo(buf);
- 
+
+
   nh.initNode();
 
   nh.advertise(p_raw);
@@ -225,9 +219,10 @@ pinMode(13, OUTPUT);
 
   nh.advertiseService(set_parameters_server);
   nh.advertiseService(reset_enc_server);
+
   nh.subscribe(command_sub);
   nh.subscribe(pan_tilt_sub);
- 
+
   nh.loginfo("Starting up...");
 
   pan_tilt_setup();
@@ -251,27 +246,27 @@ pinMode(13, OUTPUT);
 }
 
 void pub_raw() {
-  
-   raw_msg.qw = qw;
-    raw_msg.qx = qx;
-    raw_msg.qy = qy;
-    raw_msg.qz = qz;
-   
-    raw_msg.left_ticks = -(long)left_enc;
-    raw_msg.right_ticks = (long)right_enc;
 
-    raw_msg.left_urf = (float)Left_URF_Median.getMedian()/799.8124 ;//* 3.3 / 4095 *1.5515;
-    raw_msg.rear_urf = (float)Rear_URF_Median.getMedian()/799.8124 ;//* 3.3 / 4095 *1.5515;
-    raw_msg.right_urf = (float)Right_URF_Median.getMedian() /799.8124 ;//* 3.3 / 4095 *1.5515;
+  raw_msg.qw = qw;
+  raw_msg.qx = qx;
+  raw_msg.qy = qy;
+  raw_msg.qz = qz;
 
-    p_raw.publish(&raw_msg);
-    
+  raw_msg.left_ticks = -(long)left_enc;
+  raw_msg.right_ticks = (long)right_enc;
+
+  raw_msg.left_urf = (float)Left_URF_Median.getMedian() / 799.8124 ; //* 3.3 / 4095 *1.5515;
+  raw_msg.rear_urf = (float)Rear_URF_Median.getMedian() / 799.8124 ; //* 3.3 / 4095 *1.5515;
+  raw_msg.right_urf = (float)Right_URF_Median.getMedian() / 799.8124 ; //* 3.3 / 4095 *1.5515;
+
+  p_raw.publish(&raw_msg);
+
 }
 
 void loop()
 {
-  
-    control_loop();
+
+  control_loop();
 
 
   if (millis() - wd_t >= WATCHDOG_INTERVAL)  {
@@ -280,23 +275,23 @@ void loop()
       wd_on = true;
     }
   }
-  
-  
+
+
   if (millis() - status_t >= STATUS_INTERVAL)  {
     read_status();
     status_t = millis();
-  //  digitalWrite(13, !digitalRead(13));
+    digitalWrite(13, !digitalRead(13));
   }
 
 
- if (millis() - enc_t >= READ_ENCODERS_INTERVAL)  {
+  if (millis() - enc_t >= READ_ENCODERS_INTERVAL)  {
     read_encoders();
     enc_t = millis();
   }
 
-if (millis() - pub_t >= PUB_RAW_INTERVAL)  {
-   pub_raw();
- pub_t = millis();
+  if (millis() - pub_t >= PUB_RAW_INTERVAL)  {
+    pub_raw();
+    pub_t = millis();
   }
 
 
@@ -308,15 +303,17 @@ if (millis() - pub_t >= PUB_RAW_INTERVAL)  {
   }
 
   read_gps();
-  
- // if (millis() - imu_t >= CHECK_IMU_INTERVAL)  {
-   
-   read_imu();
-   
-// imu_t = millis();
- //  }
 
- pan_tilt_wd();
+if (!imu_fault) {
+  if (millis() - imu_t <= CHECK_IMU_INTERVAL)  {
+    read_imu();
+  }
+  else {
+    imu_fault = true;
+  }
+}
+
+  pan_tilt_wd();
 
   nh.spinOnce();
 }
