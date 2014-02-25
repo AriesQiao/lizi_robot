@@ -28,15 +28,3 @@ then
 fi
 
 
-echo -e "\e[32mWould you like ro run 'catkin_make' now (y/n)?\e[0m"
-read
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-   cd ..
-catkin_make
-fi
-
-
-
-
-
