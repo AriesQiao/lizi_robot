@@ -36,7 +36,7 @@
 #define LEFT_URF_PIN A8
 #define REAR_URF_PIN A9
 #define RIGHT_URF_PIN A10
-#define URF_TX_PIN 49
+#define URF_TX_PIN 5
 
 /*
 LEFT MOTOR RED->M2B
