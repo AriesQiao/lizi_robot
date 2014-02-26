@@ -4,7 +4,7 @@ project(lizi)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS geometry_msgs roscpp rospy sensor_msgs std_msgs tf rosserial_python message_generation)
+find_package(catkin REQUIRED COMPONENTS geometry_msgs roscpp rospy sensor_msgs std_msgs tf message_generation)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -78,7 +78,7 @@ add_executable(lizi_node src/lizi_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(Lizi_node Lizi_generate_messages_cpp)
+add_dependencies(lizi_node ${PROJECT_NAME}_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lizi_node
