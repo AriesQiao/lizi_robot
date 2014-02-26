@@ -141,7 +141,7 @@ TinyGPSPlus gps;
 float qx = 0, qy = 0, qz = 1, qw = 0;
 unsigned long imu_t = 0;
 unsigned long CHECK_IMU_INTERVAL;
-boolean imu_fault=0;
+boolean imu_fault = 0;
 //  DEVICE_TO_USE selects whether the IMU at address 0x68 (default) or 0x69 is used
 //    0 = use the device at 0x68
 //    1 = use the device at ox69
@@ -210,7 +210,6 @@ void setup()
   pinMode(13, OUTPUT);
   Serial.begin(SERIAL_PORT_SPEED);
 
-
   nh.initNode();
 
   nh.advertise(p_raw);
@@ -222,6 +221,7 @@ void setup()
 
   nh.subscribe(command_sub);
   nh.subscribe(pan_tilt_sub);
+
 
   nh.loginfo("Starting up...");
 
@@ -240,9 +240,7 @@ void setup()
   setup_driver();
   nh.loginfo("Driver ready");
 
-  //read_driver_parameters();
-  //pinMode(13,OUTPUT);
-  delay(50);
+
 }
 
 void pub_raw() {
@@ -304,14 +302,14 @@ void loop()
 
   read_gps();
 
-if (!imu_fault) {
-  if (millis() - imu_t <= CHECK_IMU_INTERVAL)  {
-    read_imu();
+  if (!imu_fault) {
+    if (millis() - imu_t <= CHECK_IMU_INTERVAL)  {
+      read_imu();
+    }
+    else {
+      imu_fault = true;
+    }
   }
-  else {
-    imu_fault = true;
-  }
-}
 
   pan_tilt_wd();
 
