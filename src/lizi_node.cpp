@@ -318,16 +318,7 @@ void imuCallback(float qw,float qx,float qy,float qz) {
 	tf::quaternionMsgToTF(q_imu, q);							
 	tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
 	
-	//tf::Quaternion q45;
- 	//q45 =tf::createQuaternionFromRPY(0,0,135*M_PI/180);
-	//q*=q45;
-	//tf::Matrix3x3(q).getRPY(roll, pitch, yaw);	
-	//q=tf::createQuaternionFromRPY(-roll, pitch, M_PI-yaw);
-
-	//tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
-    //  ROS_INFO("roll=%.1f, pitch=%.1f, yaw=%.1f", roll*180/M_PI, -pitch*180/M_PI,-yaw*180/M_PI);
 	q_imu =tf::createQuaternionMsgFromRollPitchYaw(roll,-pitch, -yaw);
-
 
 	imu_msg.orientation=q_imu;
 		
@@ -355,8 +346,8 @@ void imuCallback(float qw,float qx,float qy,float qz) {
 	imu_msg.orientation_covariance[8] = orientation_covariance;
 	imu_pub.publish(imu_msg);
 	
-	
-	/* geometry_msgs::TransformStamped imu_trans;
+	/*
+	geometry_msgs::TransformStamped imu_trans;
 	 imu_trans.header.stamp = ros::Time::now();
 	 imu_trans.header.frame_id = odom_frame_id;
 	 imu_trans.child_frame_id = imu_frame_id;
@@ -409,10 +400,6 @@ void pan_tiltCallback(const lizi::lizi_pan_tilt::ConstPtr& msg) {
 	if (tilt*180/M_PI>30) tilt=30*M_PI/180;
 	else if (tilt*180/M_PI<-30) tilt=-30*M_PI/180;
 
-	//jointstate_msg.header.stamp = ros::Time::now();
-	//jointstate_msg.position[0]=-msg->pan_angle;
-	//jointstate_msg.position[1]=-msg->tilt_angle;
-	//pan_tilt_pub.publish(jointstate_msg);
 
 }
 int main(int argc, char **argv) {
@@ -427,21 +414,22 @@ int main(int argc, char **argv) {
 	std::string pre="/lizi_";
 	pre+=lizi_id;
 	n.param("GPS_frame_id", gps_frame_id, std::string("/map"));
-	n.param("odom_frame_id", odom_frame_id, std::string(pre+"/odom"));
-	n.param("base_frame_id", base_frame_id, std::string(pre+"/base_link"));
-	n.param("imu_frame_id", imu_frame_id, std::string(pre+"/imu_link"));
+	
 
 	std::string pre1="lizi_";
 	pre1+=lizi_id;
-	n.param("left_urf_frame_id", left_urf_frame_id, std::string(pre1+"/Left_URF_Link"));
-	n.param("rear_urf_frame_id", rear_urf_frame_id, std::string(pre1+"/Rear_URF_Link"));
-	n.param("right_urf_frame_id", right_urf_frame_id, std::string(pre1+"/Right_URF_Link"));
-	n.param("pan_joint_id", pan_joint_id, std::string(pre1+"/Asus_Pan_Joint"));
-	n.param("tilt_joint_id", tilt_joint_id, std::string(pre1+"/Asus_Tilt_Joint"));
-	n.param("FR_joint_id", FR_joint_id, std::string(pre1+"/FR_Wheel_Joint"));
-	n.param("FL_joint_id", FL_joint_id, std::string(pre1+"/FL_Wheel_Joint"));
-	n.param("RR_joint_id", RR_joint_id, std::string(pre1+"/RR_Wheel_Joint"));
-	n.param("RL_joint_id", RL_joint_id, std::string(pre1+"/RL_Wheel_Joint"));
+	n.param("odom_frame_id", odom_frame_id, std::string(pre1+"_odom"));
+	n.param("base_frame_id", base_frame_id, std::string(pre1+"_base_link"));
+	n.param("imu_frame_id", imu_frame_id, std::string(pre1+"_imu_link"));
+	n.param("left_urf_frame_id", left_urf_frame_id, std::string(pre1+"_Left_URF_link"));
+	n.param("rear_urf_frame_id", rear_urf_frame_id, std::string(pre1+"_Rear_URF_link"));
+	n.param("right_urf_frame_id", right_urf_frame_id, std::string(pre1+"_Right_URF_link"));
+	n.param("pan_joint_id", pan_joint_id, std::string(pre1+"_Asus_Pan_Joint"));
+	n.param("tilt_joint_id", tilt_joint_id, std::string(pre1+"_Asus_Tilt_Joint"));
+	n.param("FR_joint_id", FR_joint_id, std::string(pre1+"_FR_Wheel_Joint"));
+	n.param("FL_joint_id", FL_joint_id, std::string(pre1+"_FL_Wheel_Joint"));
+	n.param("RR_joint_id", RR_joint_id, std::string(pre1+"_RR_Wheel_Joint"));
+	n.param("RL_joint_id", RL_joint_id, std::string(pre1+"_RL_Wheel_Joint"));
 
 
 	n.param("cmd_vel_sub_topic", cmd_vel_topic, std::string(pre+"/cmd_vel"));

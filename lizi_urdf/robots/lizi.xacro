@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/lizi" name="lizi_urdf">
   <link
-    name="lizi_$(arg lizi_id)/base_link">
+    name="lizi_$(arg lizi_id)_base_link">
     <inertial>
       <origin
         xyz="-0.036889 0.00027038 0.069426"
@@ -41,7 +41,7 @@
     </collision>
   </link>
   <link
-    name="lizi_$(arg lizi_id)/FL_Wheel_Link">
+    name="lizi_$(arg lizi_id)_FL_Wheel_link">
     <inertial>
       <origin
         xyz="2.9411E-11 -0.0075967 5.8231E-11"
@@ -81,20 +81,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/FL_Wheel_Joint"
+    name="lizi_$(arg lizi_id)_FL_Wheel_Joint"
     type="continuous">
     <origin
       xyz="0.118 0.1338 0.026"
       rpy="0 0 -1.3371E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/FL_Wheel_Link" />
+      link="lizi_$(arg lizi_id)_FL_Wheel_link" />
     <axis
       xyz="0 -1 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/RL_Wheel_Link">
+    name="lizi_$(arg lizi_id)_RL_Wheel_link">
     <inertial>
       <origin
         xyz="2.9411E-11 -0.0035967 5.8231E-11"
@@ -134,15 +134,15 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/RL_Wheel_Joint"
+    name="lizi_$(arg lizi_id)_RL_Wheel_Joint"
     type="continuous">
     <origin
       xyz="-0.118 0.1338 0.026"
       rpy="0 0 -6.6853E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/RL_Wheel_Link" />
+      link="lizi_$(arg lizi_id)_RL_Wheel_link" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -150,7 +150,7 @@
       velocity="0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/RR_Wheel_Link">
+    name="lizi_$(arg lizi_id)_RR_Wheel_link">
     <inertial>
       <origin
         xyz="-2.9411E-11 0.0035967 5.8231E-11"
@@ -190,20 +190,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/RR_Wheel_Joint"
+    name="lizi_$(arg lizi_id)_RR_Wheel_Joint"
     type="continuous">
     <origin
       xyz="-0.118 -0.1338 0.026"
       rpy="-1.2938E-16 -1.2938E-15 -6.6853E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/RR_Wheel_Link" />
+      link="lizi_$(arg lizi_id)_RR_Wheel_link" />
     <axis
       xyz="0 1 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/FR_Wheel_Link">
+    name="lizi_$(arg lizi_id)_FR_Wheel_link">
     <inertial>
       <origin
         xyz="-2.9052E-11 0.0035967 5.8411E-11"
@@ -243,20 +243,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/FR_Wheel_Joint"
+    name="lizi_$(arg lizi_id)_FR_Wheel_Joint"
     type="continuous">
     <origin
       xyz="0.118 -0.1338 0.026"
       rpy="4.4216E-16 -0.0061583 -2.6824E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/FR_Wheel_Link" />
+      link="lizi_$(arg lizi_id)_FR_Wheel_link" />
     <axis
       xyz="0 1 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Asus_Pan_Link">
+    name="lizi_$(arg lizi_id)_Asus_Pan_link">
     <inertial>
       <origin
         xyz="-0.015533 -0.010751 0.019512"
@@ -296,15 +296,15 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Asus_Pan_Joint"
+    name="lizi_$(arg lizi_id)_Asus_Pan_Joint"
     type="revolute">
     <origin
       xyz="0.081249 0 0.092091"
       rpy="2.1253E-16 8.5011E-16 0" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Asus_Pan_Link" />
+      link="lizi_$(arg lizi_id)_Asus_Pan_link" />
     <axis
       xyz="0 0 -1" />
     <limit
@@ -312,7 +312,7 @@
       velocity="0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Asus_Camera_Link">
+    name="lizi_$(arg lizi_id)_Asus_Camera_link">
     <inertial>
       <origin
         xyz="-0.00010275 -0.00025849 0.00032822"
@@ -352,15 +352,15 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Asus_Tilt_Joint"
+    name="lizi_$(arg lizi_id)_Asus_Tilt_Joint"
     type="revolute">
     <origin
       xyz="-0.0004889 -0.00041349 0.08"
       rpy="1.5708 -8.5011E-16 1.8067E-31" />
     <parent
-      link="lizi_$(arg lizi_id)/Asus_Pan_Link" />
+      link="lizi_$(arg lizi_id)_Asus_Pan_link" />
     <child
-      link="lizi_$(arg lizi_id)/Asus_Camera_Link" />
+      link="lizi_$(arg lizi_id)_Asus_Camera_link" />
     <axis
       xyz="-0.027278 0 -0.99963" />
     <limit
@@ -368,7 +368,7 @@
       velocity="0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Right_URF_Link">
+    name="lizi_$(arg lizi_id)_Right_URF_link">
     <inertial>
       <origin
         xyz="1.6494E-05 0.012085 -1.486E-07"
@@ -408,20 +408,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Right_URF_Joint"
+    name="lizi_$(arg lizi_id)_Right_URF_Joint"
     type="fixed">
     <origin
       xyz="-0.0074577 -0.1055 0.07895"
       rpy="0 2.6072E-16 -1.57" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Right_URF_Link" />
+      link="lizi_$(arg lizi_id)_Right_URF_link" />
     <axis
       xyz="0 0 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Left_URF_Link">
+    name="lizi_$(arg lizi_id)_Left_URF_link">
     <inertial>
       <origin
         xyz="1.6494E-05 -0.012085 1.486E-07"
@@ -461,20 +461,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Left_URF_Joint"
+    name="lizi_$(arg lizi_id)_Left_URF_Joint"
     type="fixed">
     <origin
       xyz="-0.0074577 0.1055 0.07895"
       rpy="0 0 1.57" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Left_URF_Link" />
+      link="lizi_$(arg lizi_id)_Left_URF_link" />
     <axis
       xyz="0 0 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Rear_URF_Link">
+    name="lizi_$(arg lizi_id)_Rear_URF_link">
     <inertial>
       <origin
         xyz="0.012085 -1.486E-07 1.6494E-05"
@@ -514,20 +514,20 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Rear_URF_Joint"
+    name="lizi_$(arg lizi_id)_Rear_URF_Joint"
     type="fixed">
     <origin
       xyz="-0.182 0.085 0.093934"
       rpy="0 0 3.14" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Rear_URF_Link" />
+      link="lizi_$(arg lizi_id)_Rear_URF_link" />
     <axis
       xyz="0 0 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Laser_Link">
+    name="lizi_$(arg lizi_id)_Laser_link">
     <inertial>
       <origin
         xyz="0.00079194 -0.00016941 -0.032844"
@@ -548,7 +548,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://lizi/lizi_urdf/meshes/Laser_Link.STL" />
+          filename="package://lizi/lizi_urdf/meshes/Laser_link.STL" />
       </geometry>
       <material
         name="">
@@ -562,25 +562,25 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://lizi/lizi_urdf/meshes/Laser_Link.STL" />
+          filename="package://lizi/lizi_urdf/meshes/Laser_link.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Laser_Joint"
+    name="lizi_$(arg lizi_id)_Laser_Joint"
     type="fixed">
     <origin
       xyz="0.14276 -1.1564E-05 0.10781"
       rpy="2.1253E-16 8.5011E-16 -2.6741E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Laser_Link" />
+      link="lizi_$(arg lizi_id)_Laser_link" />
     <axis
       xyz="0 0 0" />
   </joint>
   <link
-    name="lizi_$(arg lizi_id)/Camera_Link">
+    name="lizi_$(arg lizi_id)_Camera_link">
     <inertial>
       <origin
         xyz="-0.010925 -4.5428E-06 0.00024772"
@@ -620,15 +620,15 @@
     </collision>
   </link>
   <joint
-    name="lizi_$(arg lizi_id)/Camera_Joint"
+    name="lizi_$(arg lizi_id)_Camera_Joint"
     type="fixed">
     <origin
       xyz="0.178 0.05775 0.054305"
       rpy="1.6519E-18 -0.0061583 -2.6824E-16" />
     <parent
-      link="lizi_$(arg lizi_id)/base_link" />
+      link="lizi_$(arg lizi_id)_base_link" />
     <child
-      link="lizi_$(arg lizi_id)/Camera_Link" />
+      link="lizi_$(arg lizi_id)_Camera_link" />
     <axis
       xyz="0 0 0" />
   </joint>
