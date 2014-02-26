@@ -548,7 +548,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://lizi/lizi_urdf/meshes/Laser_link.STL" />
+          filename="package://lizi/lizi_urdf/meshes/Laser_Link.STL" />
       </geometry>
       <material
         name="">
@@ -562,7 +562,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://lizi/lizi_urdf/meshes/Laser_link.STL" />
+          filename="package://lizi/lizi_urdf/meshes/Laser_Link.STL" />
       </geometry>
     </collision>
   </link>
