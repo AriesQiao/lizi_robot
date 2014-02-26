@@ -430,12 +430,12 @@ int main(int argc, char **argv) {
 	n.param("odom_frame_id", odom_frame_id, std::string(pre+"/odom"));
 	n.param("base_frame_id", base_frame_id, std::string(pre+"/base_link"));
 	n.param("imu_frame_id", imu_frame_id, std::string(pre+"/imu_link"));
-	n.param("left_urf_frame_id", left_urf_frame_id, std::string(pre+"/Left_URF_link"));
-	n.param("rear_urf_frame_id", rear_urf_frame_id, std::string(pre+"/Rear_URF_link"));
-	n.param("right_urf_frame_id", right_urf_frame_id, std::string(pre+"/Right_URF_link"));
 
 	std::string pre1="lizi_";
 	pre1+=lizi_id;
+	n.param("left_urf_frame_id", left_urf_frame_id, std::string(pre1+"/Left_URF_Link"));
+	n.param("rear_urf_frame_id", rear_urf_frame_id, std::string(pre1+"/Rear_URF_Link"));
+	n.param("right_urf_frame_id", right_urf_frame_id, std::string(pre1+"/Right_URF_Link"));
 	n.param("pan_joint_id", pan_joint_id, std::string(pre1+"/Asus_Pan_Joint"));
 	n.param("tilt_joint_id", tilt_joint_id, std::string(pre1+"/Asus_Tilt_Joint"));
 	n.param("FR_joint_id", FR_joint_id, std::string(pre1+"/FR_Wheel_Joint"));
