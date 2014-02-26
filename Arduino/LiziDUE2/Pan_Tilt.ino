@@ -1,8 +1,9 @@
 void pan_tilt_setup() {
-  pan_servo.attach(PAN_SERVO_PIN);
-  tilt_servo.attach(TILT_SERVO_PIN);
-  pan_servo.write(PAN_CENTER);
-  tilt_servo.write(TILT_CENTER);
+  //center on startup
+  //pan_servo.attach(PAN_SERVO_PIN);
+  //tilt_servo.attach(TILT_SERVO_PIN);
+  //pan_servo.write(PAN_CENTER);
+  //tilt_servo.write(TILT_CENTER);
   pan_tilt_t = millis();
 }
 
