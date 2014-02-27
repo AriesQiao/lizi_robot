@@ -4,7 +4,7 @@
 <arg name="id" default='1' />
 <rosparam file="$(find lizi)/config/default.yaml" command="load" />
 <param name="Lizi_ID" value="$(arg id)" type="str"/> 
-<param name="robot_description" command="$(find xacro)/xacro.py '$(find lizi)/lizi_urdf/robots/lizi.xacro' lizi_id:=$(arg id)" />
+<param name="robot_description" command="$(find xacro)/xacro.py '$(find lizi)/lizi_urdf/robots/lizi_green.xacro' lizi_id:=$(arg id)" />
 
 <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 /map /lizi_$(arg id)_odom 20" /> 
 

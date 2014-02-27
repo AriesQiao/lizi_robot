@@ -10,6 +10,7 @@
 //SERVICES
 #define  RESET_ENCODERS_SRV "lizi_1/reset_encoders"
 #define  SET_PARAMETERS_SRV "lizi_1/set_parameters"
+#define IMU_CALIB_SRV "lizi_1/imu_calib"
 //---------------------------------------------------------------
 
 
@@ -78,25 +79,29 @@ GPS PIN 4 -> TX2 = 16
 #include <lizi/lizi_pan_tilt.h>
 #include <lizi/lizi_status.h>
 
+#include <lizi/imu_calib.h>
 #include <lizi/set_parameters.h>
 #include <std_srvs/Empty.h>
 
 #define  SERIAL_PORT_SPEED  57600
 #define PUB_RAW_INTERVAL 100 //10 hz
 unsigned long urf_t = 0, enc_t = 0, status_t = 0, pub_t;
+
 ros::NodeHandle nh;
 using std_srvs::Empty;
+using lizi::imu_calib;
 using lizi::set_parameters;
 
 
 //PROTOTYPES
 void reset_encCb(const Empty::Request & req, Empty::Response & res);
+void imu_calibCb(const imu_calib::Request & req, imu_calib::Response & res);
 void commandCb( const lizi::lizi_command& msg);
 void pantiltCb( const lizi::lizi_pan_tilt& msg);
 void set_parametersCb(const set_parameters::Request & req, set_parameters::Response & res);
 
 
-
+ros::ServiceServer<imu_calib::Request, imu_calib::Response> imu_calib_server(IMU_CALIB_SRV, &imu_calibCb);
 ros::ServiceServer<Empty::Request, Empty::Response> reset_enc_server(RESET_ENCODERS_SRV, &reset_encCb);
 ros::ServiceServer<set_parameters::Request, set_parameters::Response> set_parameters_server(SET_PARAMETERS_SRV, &set_parametersCb);
 
@@ -162,6 +167,26 @@ MPU9150Lib dueMPU; // the MPU object
 //  MPU_LPF_RATE is the low pas filter rate and can be between 5 and 188Hz
 #define MPU_LPF_RATE   40
 
+long lastPollTime; // last time the MPU-9150 was checked
+long pollInterval; // gap between polls to avoid thrashing the I2C bus
+  char temp_msg[30];
+
+int loopState; // what code to run in the loop
+
+#define LOOPSTATE_NORMAL 0 // normal execution
+#define LOOPSTATE_MAGCAL 1 // mag calibration
+#define LOOPSTATE_ACCELCAL 2 // accel calibration
+
+static CALLIB_DATA calData; // the calibration data
+
+void magCalStart(void);
+void magCalLoop(void);
+void accelCalStart(void);
+void accelCalLoop(void);
+
+
+
+
 //BATTERY MONITOR
 #define STATUS_INTERVAL 1000 //1 hz  
 #define VOLTAGE_DIVIDER_RATIO 6.67
@@ -218,7 +243,8 @@ void setup()
 
   nh.advertiseService(set_parameters_server);
   nh.advertiseService(reset_enc_server);
-
+  nh.advertiseService(imu_calib_server);
+  
   nh.subscribe(command_sub);
   nh.subscribe(pan_tilt_sub);
 

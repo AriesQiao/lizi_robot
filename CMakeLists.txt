@@ -34,6 +34,7 @@ add_service_files(
   FILES
  set_odom.srv
  set_parameters.srv
+ imu_calib.srv
 )
 
 ## Generate added messages and services with any dependencies listed here
