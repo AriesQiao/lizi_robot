@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/lizi" name="lizi_urdf">
+<xacro:property name="lizi_color" value="0 0.517 0.26 1" />
   <link
     name="lizi_$(arg lizi_id)_base_link">
     <inertial>
@@ -27,7 +28,7 @@
       <material
         name="">
         <color
-          rgba="0 0.517 0.26 1" />
+          rgba="${lizi_color}" />
       </material>
     </visual>
     <collision>
