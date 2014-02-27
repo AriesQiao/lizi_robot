@@ -1,7 +1,5 @@
 void  setup_imu() {
   Wire.begin();
-  //dueMPU.useAccelCal(false);
-  //dueMPU.useMagCal(false);
   dueMPU.selectDevice(DEVICE_TO_USE);                        // only really necessary if using device 1
   imu_fault = !dueMPU.init(MPU_UPDATE_RATE, MPU_MAG_MIX_GYRO_AND_MAG, MAG_UPDATE_RATE, MPU_LPF_RATE); // start the MPU
   if (imu_fault == false)   nh.loginfo("IMU ready");
@@ -57,7 +55,7 @@ void read_imu() {
 }
 
 
-void imu_calibCb(imu_calib::Request & req, imu_calib::Response & res) {
+void imu_calibCb(const imu_calib::Request & req, imu_calib::Response & res) {
 
   nh.loginfo("imu calic init");
   switch (loopState) {
