@@ -102,7 +102,6 @@ void cmd_velCallback(const geometry_msgs::Twist::ConstPtr& msg) {
 	lizi::lizi_command command_msg;
 	command_msg.left_wheel=(int)(Left_Motor_v*encoder_cpr/(M_PI * wheel_diameter)); //tick per sec
 	command_msg.right_wheel=(int)(Right_Motor_v*encoder_cpr/(M_PI * wheel_diameter)); //tick per sec
-	
 	command_pub.publish(command_msg);
 
 
@@ -447,9 +446,9 @@ int main(int argc, char **argv) {
 
 	n.param("set_odom_srv", set_odom_srv, std::string(pre+"/set_odom"));
 
-	n.param("wheel_diameter", wheel_diameter, 0.18);
+	n.param("wheel_diameter", wheel_diameter, 0.12);
 	n.param("wheel_base_length", wheel_base_length, 0.275);
-	n.param("encoder_cpr", encoder_cpr, 2048.0);
+	n.param("encoder_cpr", encoder_cpr, 4288.0);
 	n.param("rotation_covariance", rot_cov, 1.0);
 	n.param("position_covariance", pos_cov, 1.0);
 	n.param("fuse_imu_roll_pitch", fuse_imu_roll_pitch, true);
