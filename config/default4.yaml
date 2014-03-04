@@ -1,6 +1,6 @@
 wheel_diameter: 0.12
 wheel_base_length: 0.275
-encoder_cpr: 4288.0
+encoder_cpr: 4288
 rotation_covariance: 1.0
 position_covariance: 1.0
 
