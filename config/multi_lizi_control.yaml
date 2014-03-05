@@ -6,7 +6,7 @@ joy_pan: 0
 joy_tilt: 1
 joy_scroll_btn: 5
 
-max_vel: 5.0
+max_vel: 1.0
 max_rot: 3.0
 max_pan: 0.6
 max_tilt: 0.6
