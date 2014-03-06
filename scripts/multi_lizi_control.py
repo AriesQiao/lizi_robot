@@ -50,6 +50,7 @@ def joy_callback(data):
           scroll_btn=1
           if (current_robot>num_robots):
              current_robot=1
+          rospy.loginfo("Controlling Lizi %d",current_robot)
     if (data.buttons[joy_scroll_btn]==0):
        scroll_btn=0
 
@@ -105,6 +106,7 @@ def joy_cam():
     rospy.init_node('joy_cam', anonymous=True)
     rospy.Subscriber('joy', Joy, joy_callback)
     robot_name_global="lizi_"
+    rospy.loginfo("Controlling Lizi %d",current_robot)
     for i in range(1, num_robots+1):
       robot_name=robot_name_global+str(i)+"/cmd_vel"
       #rospy.loginfo(robot_name) 
