@@ -410,7 +410,7 @@ int main(int argc, char **argv) {
 	int liziID;
 	n.param("Lizi_ID", lizi_id, std::string("0"));
 
-	std::string pre="/lizi_";
+	std::string pre="lizi_";
 	pre+=lizi_id;
 	n.param("GPS_frame_id", gps_frame_id, std::string("/map"));
 	
@@ -431,20 +431,20 @@ int main(int argc, char **argv) {
 	n.param("RL_joint_id", RL_joint_id, std::string(pre1+"_RL_Wheel_Joint"));
 
 
-	n.param("cmd_vel_sub_topic", cmd_vel_topic, std::string(pre+"/cmd_vel"));
-	n.param("pan_tilt_sub_topic", pan_tilt_topic, std::string(pre+"/pan_tilt"));
+	n.param("cmd_vel_sub_topic", cmd_vel_topic, std::string("cmd_vel"));
+	n.param("pan_tilt_sub_topic", pan_tilt_topic, std::string("pan_tilt"));
 	
-	n.param("lizi_raw_sub_topic", lizi_raw_topic, std::string(pre+"/lizi_raw"));
-	n.param("lizi_gps_sub_topic", lizi_gps_topic, std::string(pre+"/raw_gps"));
+	n.param("lizi_raw_sub_topic", lizi_raw_topic, std::string("lizi_raw"));
+	n.param("lizi_gps_sub_topic", lizi_gps_topic, std::string("raw_gps"));
 
-	n.param("odom_pub_topic", odom_topic, std::string(pre+"/odom_pub"));
-	n.param("gps_pub_topic", gps_pub_topic, std::string(pre+"/gps_pub"));	
+	n.param("odom_pub_topic", odom_topic, std::string("odom_pub"));
+	n.param("gps_pub_topic", gps_pub_topic, std::string("gps_pub"));	
 
-	n.param("joint_states_topic", joint_states_topic, std::string("/joint_states"));	
+	n.param("joint_states_topic", joint_states_topic, std::string("joint_states"));	
 
-	n.param("lizi_command_pub_topic", lizi_command_topic, std::string(pre+"/command"));
+	n.param("lizi_command_pub_topic", lizi_command_topic, std::string("command"));
 
-	n.param("set_odom_srv", set_odom_srv, std::string(pre+"/set_odom"));
+	n.param("set_odom_srv", set_odom_srv, std::string("set_odom"));
 
 	n.param("wheel_diameter", wheel_diameter, 0.12);
 	n.param("wheel_base_length", wheel_base_length, 0.275);
@@ -469,7 +469,7 @@ int main(int argc, char **argv) {
 
 	ros::Subscriber pan_tilt_sub = n.subscribe(pan_tilt_topic, 1, pan_tiltCallback);
 
-	imu_pub = n.advertise < sensor_msgs::Imu > (pre+"/imu_pub", 10);
+	imu_pub = n.advertise < sensor_msgs::Imu > ("imu_pub", 10);
 
 	
 	jointstate_msg.name.push_back(pan_joint_id);
@@ -505,9 +505,9 @@ int main(int argc, char **argv) {
 	left_urf_msg.max_range = 6;
 
 
-	right_urf_pub = n.advertise < sensor_msgs::Range > (pre+"/Rangers/Right_URF", 5);
-	rear_urf_pub = n.advertise < sensor_msgs::Range > (pre+"/Rangers/Rear_URF", 5);
-	left_urf_pub = n.advertise < sensor_msgs::Range > (pre+"/Rangers/Left_URF", 5);
+	right_urf_pub = n.advertise < sensor_msgs::Range > ("Rangers/Right_URF", 5);
+	rear_urf_pub = n.advertise < sensor_msgs::Range > ("Rangers/Rear_URF", 5);
+	left_urf_pub = n.advertise < sensor_msgs::Range > ("Rangers/Left_URF", 5);
 	
 	odom_pub = n.advertise < nav_msgs::Odometry > (odom_topic, 10);
 

@@ -2,21 +2,25 @@
 <launch>
 
 <arg name="id" default='1' />
+
+<group ns="lizi_$(arg id)">
+
+<param name="/robot_description" command="$(find xacro)/xacro.py '$(find lizi)/lizi_urdf/robots/lizi_green.xacro' lizi_id:=$(arg id)" />
+<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 map lizi_$(arg id)_odom 20" /> 
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
+
+
 <rosparam file="$(find lizi)/config/default4.yaml" command="load" />
 <param name="Lizi_ID" value="$(arg id)" type="str"/> 
-<param name="robot_description" command="$(find xacro)/xacro.py '$(find lizi)/lizi_urdf/robots/lizi_green.xacro' lizi_id:=$(arg id)" />
-
-<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 /map /lizi_$(arg id)_odom 20" /> 
-
-<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 
 <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
       <param name="~port" value="/dev/LiziDUE" />
       <param name="~baud" value="57600" />
 </node>
 
+<node name="lizi_node" pkg="lizi" type="lizi_node" output="screen" />
 
- <node name="lizi_node" pkg="lizi" type="lizi_node" output="screen" />
+</group>
 
 
 <!--
