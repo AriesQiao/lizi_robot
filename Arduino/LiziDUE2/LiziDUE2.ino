@@ -1,16 +1,16 @@
 
 //---------Edit these line to match to set the Lizi ID  ---------
 //SUBSCRIBERS
-#define LIZI_COMMAND_TOPIC "lizi_1/command"
-#define LIZI_PAN_TILT_TOPIC "lizi_1/pan_tilt"
+#define LIZI_COMMAND_TOPIC "command"
+#define LIZI_PAN_TILT_TOPIC "pan_tilt"
 //PUBLISHER
-#define LIZI_RAW_TOPIC "lizi_1/lizi_raw"
-#define LIZI_GPS_TOPIC "lizi_1/raw_gps"
-#define LIZI_STATUS_TOPIC "lizi_1/status"
+#define LIZI_RAW_TOPIC "lizi_raw"
+#define LIZI_GPS_TOPIC "raw_gps"
+#define LIZI_STATUS_TOPIC "status"
 //SERVICES
-#define  RESET_ENCODERS_SRV "lizi_1/reset_encoders"
-#define  SET_PARAMETERS_SRV "lizi_1/set_parameters"
-#define IMU_CALIB_SRV "lizi_1/imu_calib"
+#define  RESET_ENCODERS_SRV "reset_encoders"
+#define  SET_PARAMETERS_SRV "set_parameters"
+#define IMU_CALIB_SRV "imu_calib"
 //---------------------------------------------------------------
 
 
