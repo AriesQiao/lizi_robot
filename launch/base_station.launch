@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+
+ <env name="ROS_IP" value="192.168.0.100"/>
+ <env name="ROS_MASTER_URI" value="http://192.168.0.100:11311"/>
+
+<group ns="lizi_4">
+<machine name="lizi4" address="192.168.0.104" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi/config/lizi4_env.sh" default="true"/>
+
+<rosparam file="$(find lizi)/config/default2.yaml" command="load" />
+<param name="Lizi_ID" value="4" type="str"/> 
+
+<node  pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
+      <param name="~port" value="/dev/LiziDUE" />
+      <param name="~baud" value="57600" />
+</node>
+
+<node  name="lizi_node" pkg="lizi" type="lizi_node" output="screen" />
+
+ <node  pkg="usb_cam" type="usb_cam_node" name="usb_cam_node" output="screen">
+        <param name="~video_device" value="/dev/video0" />
+        <param name="~camera_frame_id" value="lizi_4_Camera_link" />
+<param name="~pixel_format" value="yuyv" />
+  </node>
+
+</group>
+
+
+<group ns="lizi_3">
+<machine name="lizi3" address="192.168.0.103" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi/config/lizi3_env.sh" default="true"/>
+
+<rosparam file="$(find lizi)/config/default2.yaml" command="load" />
+<param name="Lizi_ID" value="3" type="str"/> 
+
+<node  pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
+      <param name="~port" value="/dev/LiziDUE" />
+      <param name="~baud" value="57600" />
+</node>
+
+<node  name="lizi_node" pkg="lizi" type="lizi_node" output="screen" />
+
+ <node  pkg="usb_cam" type="usb_cam_node" name="usb_cam_node" output="screen">
+        <param name="~video_device" value="/dev/video0" />
+        <param name="~camera_frame_id" value="lizi_3_Camera_link" />
+<param name="~pixel_format" value="yuyv" />
+  </node>
+
+</group>
+
+
+<!-- <include file="$(find lizi)/launch/multi_lizi_control.launch"/> -->
+
+
+
+
+
+
+</launch>
+
+ 
