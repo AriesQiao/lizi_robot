@@ -1,0 +1,2 @@
+SUBSYSTEMS=="usb",  ATTRS{product}=="Arduino Due Prog. Port", SYMLINK+="LiziDUE"
+
