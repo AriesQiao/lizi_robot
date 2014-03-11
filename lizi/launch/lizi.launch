@@ -5,7 +5,7 @@
 
 <group ns="lizi_$(arg id)">
 
-<param name="/robot_description" command="$(find xacro)/xacro.py '$(find lizi)/lizi_urdf/robots/lizi_green.xacro' lizi_id:=$(arg id)" />
+<param name="/robot_description" command="$(find xacro)/xacro.py '$(find lizi_urdf)/robots/lizi.xacro' lizi_id:=$(arg id)" />
 <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 map lizi_$(arg id)_odom 20" /> 
 <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 

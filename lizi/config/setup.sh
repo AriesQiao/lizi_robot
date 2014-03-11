@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../../../devel/setup.bash
+source ../../../../devel/setup.bash
 echo -e "\e[34mSetting usb rules...\e[0m"
 cp lizi_usb.rules /etc/udev/rules.d
 
@@ -10,8 +10,9 @@ usermod -a -G dialout $SUDO_USER
 echo -e "\e[34mInstalling rosserial...\e[0m"
 roscd lizi
 cd ..
+cd ..
 git clone https://github.com/ros-drivers/rosserial.git
-cp -f lizi/config/ArduinoHardware.h rosserial/rosserial_arduino/src/ros_lib
+cp -f lizi_robot/lizi_arduino/ArduinoHardware.h rosserial/rosserial_arduino/src/ros_lib
 
 echo -e "\e[32mWould you like ro install usb_cam package (front webcam support) (y/n)?\e[0m"
 read
