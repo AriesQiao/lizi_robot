@@ -10,7 +10,7 @@
 <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 
 
-<rosparam file="$(find lizi)/config/default2.yaml" command="load" />
+<rosparam file="$(find lizi)/config/default.yaml" command="load" />
 <param name="Lizi_ID" value="$(arg id)" type="str"/> 
 
 <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
