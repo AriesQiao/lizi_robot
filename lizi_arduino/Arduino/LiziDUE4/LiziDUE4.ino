@@ -104,7 +104,6 @@ GPS PIN 4 -> TX2 = 16
 #include <lizi/lizi_status.h>
 
 #include <lizi/imu_calib.h>
-#include <lizi/set_parameters.h>
 #include <std_srvs/Empty.h>
 
 #define  SERIAL_PORT_SPEED  57600
@@ -114,7 +113,6 @@ unsigned long urf_t = 0, enc_t = 0, status_t = 0, pub_t;
 ros::NodeHandle nh;
 using std_srvs::Empty;
 using lizi::imu_calib;
-using lizi::set_parameters;
 
 
 //PROTOTYPES
@@ -122,12 +120,10 @@ void reset_encCb(const Empty::Request & req, Empty::Response & res);
 void imu_calibCb(const imu_calib::Request & req, imu_calib::Response & res);
 void commandCb( const lizi::lizi_command& msg);
 void pantiltCb( const lizi::lizi_pan_tilt& msg);
-void set_parametersCb(const set_parameters::Request & req, set_parameters::Response & res);
 
 
 ros::ServiceServer<imu_calib::Request, imu_calib::Response> imu_calib_server(IMU_CALIB_SRV, &imu_calibCb);
 ros::ServiceServer<Empty::Request, Empty::Response> reset_enc_server(RESET_ENCODERS_SRV, &reset_encCb);
-ros::ServiceServer<set_parameters::Request, set_parameters::Response> set_parameters_server(SET_PARAMETERS_SRV, &set_parametersCb);
 
 ros::Subscriber<lizi::lizi_command> command_sub(LIZI_COMMAND_TOPIC, &commandCb );
 
@@ -275,21 +271,22 @@ void setup()
   nh.advertise(p_gps);
   nh.advertise(p_status);
 
-  nh.advertiseService(set_parameters_server);
   nh.advertiseService(reset_enc_server);
   nh.advertiseService(imu_calib_server);
   
   nh.subscribe(command_sub);
   nh.subscribe(pan_tilt_sub);
 
-
+  while (!nh.connected()) {
+    nh.spinOnce();
+  }
+  
   nh.loginfo("Starting up...");
 
   pan_tilt_setup();
   nh.loginfo("Pan Tilt ready");
 
   setup_imu();
-  nh.loginfo("IMU ready");
 
   setup_urf();
   nh.loginfo("URF sensors ready");

@@ -1,6 +1,19 @@
 
 void setup_driver() {
 
+  float pid_constatns[5];
+  if (!nh.getParam("pid_constants", pid_constatns, 5)) {
+    nh.loginfo("No PID parameters found, using defaults.");
+  }
+  else {
+    PID1.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    PID2.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    PID3.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    PID4.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    alpha = pid_constatns[3];
+    CONTROL_INTERVAL = (int)pid_constatns[4];
+  }
+
   Setpoint1 = 0;
   Setpoint2 = 0;
   Setpoint3 = 0;
@@ -23,6 +36,26 @@ void setup_driver() {
   md34.init();
   md34.restart();
 
+char log_msg[30];
+
+  nh.loginfo("PID parameters");
+  sprintf(log_msg, "kp*10000 = %d", (int)(PID1.GetKp() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "ki*10000 = %d", (int)(PID1.GetKi() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "kd*10000 = %d", (int)(PID1.GetKd() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "alpha*10000 = %d", (int)(alpha * 10000));
+  nh.loginfo(log_msg);
+
+  sprintf(log_msg, "Control loop dt = %d", CONTROL_INTERVAL);
+  nh.loginfo(log_msg);
 
   stop_motors();
 
@@ -90,59 +123,6 @@ void control_loop() {
 
 
 
-
-
-
-void set_parametersCb(const set_parameters::Request & req, set_parameters::Response & res) {
-
-  /*
-  if ((req.kp == 0) && (req.ki == 0)&&(req.kd == 0)&&(req.alpha == 0)) {
-  nh.loginfo("Setting lizi ID (will only take effect after next reboot)");
-    id[0]=req.control_dt;
-  flash1.write(FLASH_START, id, DATA_LENGTH);
-
-  char log_msg[30];
-    sprintf(log_msg, "New id is: = %d", (int)(((uint32_t *)FLASH_START)[0]) );
-    nh.loginfo(log_msg);
-
-  }
-
-  else {*/
-  PID1.SetTunings(req.kp, req.ki, req.kd);
-  PID2.SetTunings(req.kp, req.ki, req.kd);
-  PID3.SetTunings(req.kp, req.ki, req.kd);
-  PID4.SetTunings(req.kp, req.ki, req.kd);
-  alpha = req.alpha;
-  CONTROL_INTERVAL = req.control_dt;
-  PID1.SetSampleTime(CONTROL_INTERVAL);
-  PID2.SetSampleTime(CONTROL_INTERVAL);
-  PID3.SetSampleTime(CONTROL_INTERVAL);
-  PID4.SetSampleTime(CONTROL_INTERVAL);
-  //DT=(double)CONTROL_INTERVAL/1000.0;
-  char log_msg[30];
-
-  nh.loginfo("Setting parameters");
-  sprintf(log_msg, "kp*10000 = %d", (int)(kp * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "ki*10000 = %d", (int)(ki * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "kd*10000 = %d", (int)(kd * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "alpha*10000 = %d", (int)(alpha * 10000));
-  nh.loginfo(log_msg);
-
-  sprintf(log_msg, "Control loop dt = %d", CONTROL_INTERVAL);
-  nh.loginfo(log_msg);
-
-  // }
-}
-
 void reset_encCb(const Empty::Request & req, Empty::Response & res) {
   Enc1.write(0);
   Enc2.write(0);
@@ -198,11 +178,11 @@ void stop_motors( ) {
 
   Setpoint1 = 0;
   Setpoint2 = 0;
-    Setpoint3 = 0;
+  Setpoint3 = 0;
   Setpoint4 = 0;
   md12.setSpeeds(0, 0); //+-255
   md12.setTorque(false);
-   md34.setSpeeds(0, 0); //+-255
+  md34.setSpeeds(0, 0); //+-255
   md34.setTorque(false);
 }
 

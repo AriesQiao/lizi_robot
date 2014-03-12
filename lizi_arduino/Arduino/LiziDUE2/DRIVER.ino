@@ -1,6 +1,18 @@
 
 void setup_driver() {
 
+
+  float pid_constatns[5];
+  if (!nh.getParam("pid_constants", pid_constatns, 5)) {
+      nh.loginfo("No PID parameters found, using defaults.");
+  }
+  else {
+    PID1.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    PID2.SetTunings(pid_constatns[0], pid_constatns[1], pid_constatns[2]);
+    alpha = pid_constatns[3];
+    CONTROL_INTERVAL = (int)pid_constatns[4];
+  }
+
   Setpoint1 = 0;
   Setpoint2 = 0;
   PID1.SetSampleTime(CONTROL_INTERVAL);
@@ -13,6 +25,26 @@ void setup_driver() {
   md.init();
   md.restart();
 
+char log_msg[30];
+
+  nh.loginfo("PID parameters");
+  sprintf(log_msg, "kp*10000 = %d", (int)(PID1.GetKp() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "ki*10000 = %d", (int)(PID1.GetKi() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "kd*10000 = %d", (int)(PID1.GetKd() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "alpha*10000 = %d", (int)(alpha * 10000));
+  nh.loginfo(log_msg);
+
+  sprintf(log_msg, "Control loop dt = %d", CONTROL_INTERVAL);
+  nh.loginfo(log_msg);
 
   stop_motors();
 
@@ -26,8 +58,8 @@ void read_status() {
   int faults_bit = md.getFault();
   int torque_bit = !md.getTorque();
   int gps_fix_bit = !gps.location.isValid();
-int imu_bit=(int)imu_fault;
-  status_msg.faults = 8*imu_bit + 4 * gps_fix_bit + 2 * torque_bit + faults_bit;
+  int imu_bit = (int)imu_fault;
+  status_msg.faults = 8 * imu_bit + 4 * gps_fix_bit + 2 * torque_bit + faults_bit;
   status_msg.battery_voltage = (float)analogRead(BATTERY_MONITOR_PIN) * 3.3 / 4096 * VOLTAGE_DIVIDER_RATIO;
   p_status.publish(&status_msg);
 
@@ -59,55 +91,6 @@ void control_loop() {
 }
 
 
-
-
-
-
-void set_parametersCb(const set_parameters::Request & req, set_parameters::Response & res) {
-
-  /*
-  if ((req.kp == 0) && (req.ki == 0)&&(req.kd == 0)&&(req.alpha == 0)) {
-  nh.loginfo("Setting lizi ID (will only take effect after next reboot)");
-    id[0]=req.control_dt;
-  flash1.write(FLASH_START, id, DATA_LENGTH);
-
-  char log_msg[30];
-    sprintf(log_msg, "New id is: = %d", (int)(((uint32_t *)FLASH_START)[0]) );
-    nh.loginfo(log_msg);
-
-  }
-
-  else {*/
-  PID1.SetTunings(req.kp, req.ki, req.kd);
-  PID2.SetTunings(req.kp, req.ki, req.kd);
-  alpha = req.alpha;
-  CONTROL_INTERVAL = req.control_dt;
-  PID1.SetSampleTime(CONTROL_INTERVAL);
-  PID2.SetSampleTime(CONTROL_INTERVAL);
-  //DT=(double)CONTROL_INTERVAL/1000.0;
-  char log_msg[30];
-
-  nh.loginfo("Setting parameters");
-  sprintf(log_msg, "kp*10000 = %d", (int)(kp * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "ki*10000 = %d", (int)(ki * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "kd*10000 = %d", (int)(kd * 10000));
-  nh.loginfo(log_msg);
-
-
-  sprintf(log_msg, "alpha*10000 = %d", (int)(alpha * 10000));
-  nh.loginfo(log_msg);
-
-  sprintf(log_msg, "Control loop dt = %d", CONTROL_INTERVAL);
-  nh.loginfo(log_msg);
-
-  // }
-}
 
 void reset_encCb(const Empty::Request & req, Empty::Response & res) {
   Enc1.write(0);

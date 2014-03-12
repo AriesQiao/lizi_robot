@@ -33,7 +33,6 @@ add_message_files(
 add_service_files(
   FILES
  set_odom.srv
- set_parameters.srv
  imu_calib.srv
 )
 
