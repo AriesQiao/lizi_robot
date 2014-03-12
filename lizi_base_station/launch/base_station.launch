@@ -2,6 +2,10 @@
 <launch>
 
 
+<include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/> 
+
+
+
 <machine name="lizi3" address="192.168.0.103" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env/lizi3_env.sh" default="true"/>
 
 <group ns="lizi_3">
@@ -29,9 +33,6 @@
 
 </group>
 -->
-
-<include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/> 
-
 
 
 
