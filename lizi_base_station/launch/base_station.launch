@@ -6,6 +6,12 @@
 <group ns="lizi_3">
 <machine name="lizi3" address="192.168.0.103" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env/lizi3_env.sh" default="true"/>
 
+
+<param name="/robot_description" command="$(find xacro)/xacro.py '$(find lizi_urdf)/robots/lizi.xacro' lizi_id:=3" />
+<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 map lizi_3_odom 20" /> 
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
+
+
 <rosparam file="$(find lizi)/config/default.yaml" command="load" />
 <param name="Lizi_ID" value="3" type="str"/> 
 
