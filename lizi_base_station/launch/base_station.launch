@@ -4,7 +4,7 @@
 
 
 <group ns="lizi_3">
-<machine name="lizi3" address="192.168.0.103" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi/config/lizi_env/lizi3_env.sh" default="true"/>
+<machine name="lizi3" address="192.168.0.103" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env/lizi3_env.sh" default="true"/>
 
 <rosparam file="$(find lizi)/config/default.yaml" command="load" />
 <param name="Lizi_ID" value="3" type="str"/> 
@@ -30,7 +30,7 @@
 
 </group>
 
-
+<!--
 <group ns="lizi_4">
 <machine name="lizi4" address="192.168.0.104" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi/config/lizi_env/lizi4_env.sh" default="true"/>
 
@@ -57,7 +57,7 @@
 
 </group>
 
-
+-->
 
 <!-- <include file="$(find lizi)/launch/multi_lizi_control.launch"/> -->
 
