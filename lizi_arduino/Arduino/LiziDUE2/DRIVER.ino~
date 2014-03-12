@@ -25,6 +25,26 @@ void setup_driver() {
   md.init();
   md.restart();
 
+char log_msg[30];
+
+  nh.loginfo("PID parameters");
+  sprintf(log_msg, "kp*10000 = %d", (int)(PID1.GetKp() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "ki*10000 = %d", (int)(PID1.GetKi() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "kd*10000 = %d", (int)(PID1.GetKd() * 10000));
+  nh.loginfo(log_msg);
+
+
+  sprintf(log_msg, "alpha*10000 = %d", (int)(alpha * 10000));
+  nh.loginfo(log_msg);
+
+  sprintf(log_msg, "Control loop dt = %d", CONTROL_INTERVAL);
+  nh.loginfo(log_msg);
 
   stop_motors();
 

@@ -9,7 +9,6 @@
 #define LIZI_STATUS_TOPIC "status"
 //SERVICES
 #define  RESET_ENCODERS_SRV "reset_encoders"
-#define  SET_PARAMETERS_SRV "set_parameters"
 #define IMU_CALIB_SRV "imu_calib"
 //---------------------------------------------------------------
 
@@ -80,7 +79,6 @@ GPS PIN 4 -> TX2 = 16
 #include <lizi/lizi_status.h>
 
 #include <lizi/imu_calib.h>
-#include <lizi/set_parameters.h>
 #include <std_srvs/Empty.h>
 
 #define  SERIAL_PORT_SPEED  57600

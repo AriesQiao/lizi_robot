@@ -9,6 +9,7 @@
 #define LIZI_STATUS_TOPIC "status"
 //SERVICES
 #define  RESET_ENCODERS_SRV "reset_encoders"
+#define  SET_PARAMETERS_SRV "set_parameters"
 #define IMU_CALIB_SRV "imu_calib"
 //---------------------------------------------------------------
 
