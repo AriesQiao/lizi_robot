@@ -28,4 +28,9 @@ then
     apt-get install ros-hydro-openni2-*
 fi
 
-
+echo -e "\e[32mWould you like ro install openssh packages (remote machine control support) (y/n)?\e[0m"
+read
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    apt-get install openssh-client openssh-server
+fi
