@@ -331,7 +331,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="1.57 0 0" />
       <geometry>
         <mesh
           filename="package://lizi_urdf/meshes/Asus_Camera_Link.STL" />
@@ -357,13 +357,13 @@
     type="revolute">
     <origin
       xyz="-0.0004889 -0.00041349 0.08"
-      rpy="1.5708 -8.5011E-16 1.8067E-31" />
+      rpy="0 0 0" />
     <parent
       link="lizi_$(arg lizi_id)_Asus_Pan_link" />
     <child
       link="lizi_$(arg lizi_id)_Asus_Camera_link" />
     <axis
-      xyz="-0.027278 0 -0.99963" />
+      xyz="0 1 0" />
     <limit
       effort="0"
       velocity="0" />
