@@ -8,8 +8,7 @@ usermod -a -G dialout $SUDO_USER
 
 
 echo -e "\e[34mInstalling rosserial...\e[0m"
-roscd lizi
-cd ..
+roscd lizi_robot
 cd ..
 git clone https://github.com/ros-drivers/rosserial.git
 cp -f lizi_robot/lizi_arduino/ArduinoHardware.h rosserial/rosserial_arduino/src/ros_lib
