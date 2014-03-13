@@ -1,5 +1,4 @@
 
-//---------Edit these line to match to set the Lizi ID  ---------
 //SUBSCRIBERS
 #define LIZI_COMMAND_TOPIC "command"
 #define LIZI_PAN_TILT_TOPIC "pan_tilt"
@@ -10,7 +9,7 @@
 //SERVICES
 #define  RESET_ENCODERS_SRV "reset_encoders"
 #define IMU_CALIB_SRV "imu_calib"
-//---------------------------------------------------------------
+
 
 
 
