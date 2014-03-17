@@ -5,6 +5,7 @@
   <description>Lizi robot package collection</description>
   <url>http://www.ros.org/wiki/lizi_robot</url>
   <maintainer email="support@robotican.net">RoboTiCan</maintainer>
+  <author email="support@robotican.net">RoboTiCan</author>
   <license>BSD</license>
 
 
