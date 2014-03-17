@@ -14,10 +14,10 @@
   <run_depend>lizi</run_depend>
   <run_depend>lizi_base_station</run_depend>
   <run_depend>lizi_urdf</run_depend>
+  <run_depend>lizi_arduino</run_depend>
 
   <export>
   	<metapackage/>
   </export>
   
 </package>
-
