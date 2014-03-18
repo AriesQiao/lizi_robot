@@ -1,4 +1,3 @@
-
 //SUBSCRIBERS
 #define LIZI_COMMAND_TOPIC "command"
 #define LIZI_PAN_TILT_TOPIC "pan_tilt"
@@ -19,8 +18,8 @@
 #define PAN_SERVO_PIN 2
 #define TILT_SERVO_PIN 3
 
-#define M1DIR_PIN 7//10
-#define M2DIR_PIN 8//11
+#define M1DIR_PIN 10
+#define M2DIR_PIN 11
 #define M1PWM_PIN 9
 #define M2PWM_PIN 6
 #define M1FB_PIN A0 //not in use
@@ -34,8 +33,8 @@
 
 #define M3DIR_PIN 40
 #define M4DIR_PIN 41
-#define M3PWM_PIN 10//7
-#define M4PWM_PIN 11//8
+#define M3PWM_PIN 7
+#define M4PWM_PIN 8
 #define M3FB_PIN A2 //not in use
 #define M4FB_PIN A3 //not in use
 #define nD34_PIN 42
