@@ -13,7 +13,7 @@
 
 
 //PINS
-#define BATTERY_MONITOR_PIN A11
+#define BATTERY_MONITOR_PIN A5
 
 #define PAN_SERVO_PIN 2
 #define TILT_SERVO_PIN 3
