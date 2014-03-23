@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>lizi_robot</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>Lizi robot package collection</description>
   <url>http://www.ros.org/wiki/lizi_robot</url>
   <maintainer email="support@robotican.net">RoboTiCan</maintainer>

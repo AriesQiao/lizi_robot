@@ -2,8 +2,8 @@
 Changelog for package lizi_base_station
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.2 (2014-03-23)
+------------------
 * bug fixes
 * Contributors: lizi
 
