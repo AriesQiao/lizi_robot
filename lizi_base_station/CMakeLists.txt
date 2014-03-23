@@ -47,12 +47,12 @@ find_package(catkin REQUIRED COMPONENTS geometry_msgs lizi roscpp rospy sensor_m
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-   INCLUDE_DIRS include
+catkin_package()
+#   INCLUDE_DIRS include
 #  LIBRARIES lizi_base_station
 #  CATKIN_DEPENDS geometry_msgs lizi roscpp rospy sensor_msgs std_msgs
 #  DEPENDS system_lib
-)
+#)
 
 ###########
 ## Build ##
