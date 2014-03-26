@@ -27,6 +27,10 @@
 <arg name="machine" value="lizi$(arg id)" />
 </include>
 
+<node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" output="screen">
+	<param name="port" value="/dev/Hokuyo" />
+	<param name="frame_id" value="lizi_$(arg id)_Laser_link" />
+</node>
 
 </launch>
 
