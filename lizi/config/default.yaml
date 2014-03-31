@@ -5,5 +5,5 @@ encoder_cpr: 4288 # 4288 for lizi4, 56000 for lizi2
 fuse_imu_roll_pitch: true
 fuse_imu_yaw: false
 
-pid_constants: [0.001,0.01, 0.0, 0.5,1.0] # [kp,ki,kd,alpha(0-1),control_dt(ms)] 
+pid_constants: [0.02,0.2,0.0,0.5,1.0] # [kp,ki,kd,alpha(0-1),control_dt(ms)]   [0.02,0.2,0.0,0.5,1.0] for lizi4, [0.001,0.01, 0.0, 0.5,1.0] for lizi2
 
