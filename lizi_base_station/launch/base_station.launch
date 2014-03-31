@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-<!-- <include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/> --> 
+<include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/>
 
 <machine name="lizi1" address="192.168.0.101" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env.sh" default="true"/>
 
@@ -20,17 +20,17 @@
 </group>
 
 
-<!--
+
 <machine name="lizi2" address="192.168.0.102" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env.sh" default="true"/>
 
 <group ns="lizi_2">
 
-<include file="$(find lizi_base_station)/launch/remote_lizi.launch">
+<include file="$(find lizi_base_station)/launch/remote_lizi_no_laser.launch">
 <arg name="id" value="2" />
 </include>
 
 </group>
--->
+
 
 
 
