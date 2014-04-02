@@ -1,2 +1,3 @@
 SUBSYSTEMS=="usb",  ATTRS{product}=="Arduino Due Prog. Port", SYMLINK+="LiziDUE"
 SUBSYSTEMS=="usb",ATTRS{manufacturer}=="Hokuyo Data Flex for USB", SYMLINK+="Hokuyo", MODE="0666"
+SUBSYSTEMS=="usb", ATTRS{product}=="Xbox 360 Wireless Receiver for Windows", SYMLINK+="input/Xbox360", MODE="0666"
