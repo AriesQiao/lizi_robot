@@ -2,15 +2,14 @@
 <launch>
 
 
-<!-- Load Joystick  /dev/input/js0 is usually the default-->
-<param name="joy_node/dev" value="/dev/input/Xbox360" type="str"/>
 <rosparam file="$(find lizi_base_station)/config/multi_lizi_control.yaml" command="load" />
-<node name="joy_node" pkg="joy" type="joy_node" output="screen" /> 
+
+<node pkg="joy" name="joy" type="joy_node" output="screen">
+    <param name="deadzone" type="double" value="0.10" />
+    <param name="dev" type="str" value="/dev/input/Xbox360" />  <!-- Change this to your joystick port -->	
+</node>
+
 <node name="multi_lizi_control" pkg="lizi_base_station" type="multi_lizi_control.py" output="screen" />
-<!-- End Joystick -->
-
-
 
 </launch>
-
  
