@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
+<node  name="rqt_gui" pkg="rqt_gui" type="rqt_gui" output="screen" />
+
 <include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/>
 
 <machine name="lizi1" address="192.168.0.101" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env.sh" default="true"/>
