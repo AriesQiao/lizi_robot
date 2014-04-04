@@ -20,6 +20,9 @@
         <param name="~video_device" value="/dev/video0" />
         <param name="~camera_frame_id" value="lizi_$(arg id)_Camera_link" />
 <param name="~pixel_format" value="yuyv" />
+<param name="~image_width" value="320" />
+<param name="~image_height" value="240" />
+<param name="~framerate" value="20" />
 </node>
 
 <include file="$(find openni2_launch)/launch/openni2.launch">
