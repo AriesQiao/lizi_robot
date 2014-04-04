@@ -5,7 +5,7 @@
 <rosparam file="$(find lizi_base_station)/config/multi_lizi_control.yaml" command="load" />
 
 <node pkg="joy" name="joy" type="joy_node" output="screen">
-    <param name="deadzone" type="double" value="0.10" />
+    <param name="deadzone" type="double" value="0.15" />
     <param name="dev" type="str" value="/dev/input/Xbox360" />  <!-- Change this to your joystick port -->	
 </node>
 
