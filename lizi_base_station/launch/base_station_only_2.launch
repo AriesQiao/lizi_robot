@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- <node  name="rqt_gui" pkg="rqt_gui" type="rqt_gui" output="screen" />  -->
+
+
+<node name="image_view2" pkg="image_view" type="image_view" output="screen">
+  <remap from="image" to="/lizi_2/usb_cam_node/image_raw"/>
+  <param name="window_name" value="Lizi 2" />
+<param name="image_transport" value="theora" />
+</node>
+
+
+<include file="$(find lizi_base_station)/launch/multi_lizi_control.launch"/>
+
+<machine name="lizi2" address="192.168.0.102" user="lizi" password="a" env-loader="~/catkin_ws/src/lizi_robot/lizi/config/lizi_env.sh" default="true"/>
+
+
+<group ns="lizi_2">
+
+<!-- ~~~~~~~ UNCOMMENT TO VIEW THIS ROBOT IN RVIZ ~~~~~~~ -->
+<param name="/robot_description" command="$(find xacro)/xacro.py '$(find lizi_urdf)/robots/lizi.xacro' lizi_id:=2" />
+<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 map lizi_1_odom 20" /> 
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<include file="$(find lizi_base_station)/launch/remote_lizi_no_laser.launch">
+<arg name="id" value="2" />
+</include>
+</group>
+
+
+</launch>
+
+ 
