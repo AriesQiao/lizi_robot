@@ -67,7 +67,7 @@ def joy_callback(data):
 	  else:
 	     slow=0.5
           slow_btn=1
-          rospy.loginfo("Max velocity is %f",max_vel*slow)
+          rospy.loginfo("Max velocity is %f m/s",max_vel*slow)
     if (data.buttons[joy_slow_btn]==0):
        slow_btn=0
     if (data.buttons[joy_center_btn]==1):
@@ -157,7 +157,7 @@ def joy_cam():
       rospy.sleep(0.1)
     rospy.sleep(15)
     rospy.loginfo("Ready to control, Controlling Lizi %d",current_robot)
-    rospy.loginfo("Max velocity is %f",max_vel*slow)
+    rospy.loginfo("Max velocity is %f m/s",max_vel*slow)
     while not rospy.is_shutdown():
       pub[current_robot-1].publish(msg)
       msg_pt.pan_angle=msg_pt.pan_angle+pan_dir*pan_vel
