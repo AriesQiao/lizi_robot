@@ -106,7 +106,7 @@ def joy_cam():
     rospy.init_node('joy_cam', anonymous=True)
     rospy.Subscriber('joy', Joy, joy_callback)
     robot_name_global="lizi_"
-    rospy.loginfo("Controlling Lizi %d",current_robot)
+    rospy.loginfo("Waiting for robots to load")
     for i in range(1, num_robots+1):
       robot_name=robot_name_global+str(i)+"/cmd_vel"
       #rospy.loginfo(robot_name) 
@@ -117,6 +117,8 @@ def joy_cam():
       pub_pt[i-1] = rospy.Publisher(robot_name_pt, lizi_pan_tilt)
       pub_pt[i-1].publish(msg_pt)
       rospy.sleep(0.1)
+    rospy.sleep(10)
+    rospy.loginfo("Ready to control, Controlling Lizi %d",current_robot)
     while not rospy.is_shutdown():
       pub[current_robot-1].publish(msg)
       msg_pt.pan_angle=msg_pt.pan_angle+pan_dir*pan_vel
