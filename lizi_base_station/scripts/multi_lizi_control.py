@@ -177,5 +177,5 @@ def joy_cam():
       rospy.sleep(0.15)
 
 if __name__ == '__main__':
-    rospy.loginfo("Starting joy_cam.py node")
+    rospy.loginfo("Starting  multi_lizi_control.py node")
     joy_cam()
