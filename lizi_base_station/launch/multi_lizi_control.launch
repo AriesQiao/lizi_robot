@@ -6,7 +6,7 @@
 
 <node pkg="joy" name="joy" type="joy_node" output="screen">
     <param name="deadzone" type="double" value="0.15" />
-    <param name="dev" type="str" value="/dev/input/Xbox360" />  <!-- Change this to your joystick port -->	
+    <param name="dev" type="str" value="/dev/input/js0" />  <!-- Change this to your joystick port -->	
 </node>
 
 <node name="multi_lizi_control" pkg="lizi_base_station" type="multi_lizi_control.py" output="screen" />
