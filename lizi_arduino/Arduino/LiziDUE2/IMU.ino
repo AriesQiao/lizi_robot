@@ -57,7 +57,7 @@ void read_imu() {
 
 void imu_calibCb(const imu_calib::Request & req, imu_calib::Response & res) {
 
-  nh.loginfo("imu calic init");
+  //nh.loginfo("imu calib init");
   switch (loopState) {
     case LOOPSTATE_NORMAL:
       switch (req.com) {
