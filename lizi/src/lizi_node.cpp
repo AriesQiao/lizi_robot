@@ -171,19 +171,22 @@ void encodersCallback(int32_t left_ticks, int32_t right_ticks) {
 		odom_msg.pose.pose.position.x = xx;
 		odom_msg.pose.pose.position.y = yy;
 		odom_msg.pose.pose.position.z = 0;
-		
+		double roll = 0, pitch = 0, yaw = 0;
 		if ((fuse_imu_roll_pitch)&&(fuse_imu_yaw)) {
-			odom_msg.pose.pose.orientation = q_odom=q_imu;		
+			q_odom =q_imu;	
+			tf::Quaternion q;		
+			tf::quaternionMsgToTF(q_imu, q);				
+			tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
+			tt=yaw;		
 		}
 		else if ((!fuse_imu_roll_pitch)&&(fuse_imu_yaw)) {
-			double roll = 0, pitch = 0, yaw = 0;					
 			tf::Quaternion q;		
 			tf::quaternionMsgToTF(q_imu, q);				
 			tf::Matrix3x3(q).getRPY(roll, pitch, yaw);	
 			q_odom =tf::createQuaternionMsgFromRollPitchYaw(0,0, yaw);
+			tt=yaw;
 		}
 		else if ((fuse_imu_roll_pitch)&&(!fuse_imu_yaw)) {
-					double roll = 0, pitch = 0, yaw = 0;					
 					tf::Quaternion q;		
 					tf::quaternionMsgToTF(q_imu, q);				
 					tf::Matrix3x3(q).getRPY(roll, pitch, yaw);	
