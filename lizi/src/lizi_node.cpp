@@ -75,6 +75,7 @@ bool first_enc_read = true;
 
 bool fuse_imu_roll_pitch;
 bool fuse_imu_yaw;
+double slip_factor;
 
 double rot_cov = 0.0;
 double pos_cov = 0.0;
@@ -155,7 +156,7 @@ void encodersCallback(int32_t left_ticks, int32_t right_ticks) {
 				first_enc_read = false;
 			}
 		
-		tt = tt + w * delta_time;
+		tt = tt + w * delta_time*slip_factor;
 		tt = wrapToPi(tt);
 		xx = xx + (v * cos(tt))*delta_time;
 		yy = yy + (v * sin(tt))*delta_time;
@@ -455,7 +456,8 @@ int main(int argc, char **argv) {
 	n.param("position_covariance", pos_cov, 1.0);
 	n.param("fuse_imu_roll_pitch", fuse_imu_roll_pitch, true);
 	n.param("fuse_imu_yaw", fuse_imu_yaw, false);
-		
+	n.param("slip_factor", slip_factor, 0.85); 
+	
 	q_imu.x=0;
 	q_imu.y=0;
 	q_imu.z=1;
